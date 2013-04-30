@@ -1,3 +1,0 @@
-<!-- BEGIN_INCLUDE(memcached:my-processor) -->
-    <memcached:my-processor content="#[map-payload:content]" />
-<!-- END_INCLUDE(memcached:my-processor) -->
