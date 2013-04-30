@@ -4,7 +4,7 @@ WELCOME
 Congratulations you have just created a new Mule cloud connector!
 
 Now you need to make sure that you update you pom.xml to use version
-3.3.4 of Mule. This will ensure you are compiling against the correct
+3.3.1 of Mule. This will ensure you are compiling against the correct
 version of Mule and you will avoid issues arising from not being about to find
 configuration schemas for this module.
 

@@ -3,18 +3,75 @@
  */
 package mx.maleficarum.memcached;
 
+import groovy.json.JsonBuilder;
+import groovy.json.JsonSlurper;
+
+import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+
+import net.spy.memcached.BinaryConnectionFactory;
+
+import org.mule.api.annotations.Connect;
 import org.mule.tools.cloudconnect.annotations.Connector;
 import org.mule.tools.cloudconnect.annotations.Operation;
+import org.mule.tools.cloudconnect.annotations.Property;
 
 @Connector(namespacePrefix="memcached")
 public class MemcachedCloudConnector {
+	
+	private InetSocketAddress[] servers = null; //new InetSocketAddress[]{ new InetSocketAddress("127.0.0.1", 11211) };
+	protected net.spy.memcached.MemcachedClient mc = null;
+	
+	@Property
+	private String host;
+	
+	@Connect
+	public void connect() {
+		try {
+			servers = new InetSocketAddress[]{ new InetSocketAddress( host , 11211) };
+			mc = new net.spy.memcached.MemcachedClient(new BinaryConnectionFactory(), new ArrayList<InetSocketAddress>(Arrays.asList(servers)));
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}	
     
     @Operation
-    public void sendMessage(String key, Object message) {
+    public Object send(String key, Object message) {
+		
+		if(mc != null) {
+			JsonBuilder builder = new  JsonBuilder(message);
+			mc.set(key, 3600, builder.toString());
+		}
+		
+		return message;    	
     }
     
     @Operation
-    public Object getMessage(String key) {
-    	return null;
+    public Map<String, Object> receive(String key) {	
+    	Map<String, Object> map = null;
+    	
+		if(mc != null) {
+			Object object = mc.get(key);
+
+			if(object != null) {
+				JsonSlurper parser = new JsonSlurper();
+				
+				map = (Map<String, Object>) parser.parseText((String) object);
+			}
+		}
+		
+		return map;
     }
+
+	public String getHost() {
+		return host;
+	}
+
+	public void setHost(String host) {
+		this.host = host;
+	}
+    
+    
 }
