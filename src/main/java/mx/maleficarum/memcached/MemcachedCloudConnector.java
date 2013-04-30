@@ -38,14 +38,14 @@ public class MemcachedCloudConnector {
 	}	
     
     @Operation
-    public Object send(String key, Object message) {
+    public Object send(String key, Object payload) {
 		
 		if(mc != null) {
-			JsonBuilder builder = new  JsonBuilder(message);
+			JsonBuilder builder = new  JsonBuilder(payload);
 			mc.set(key, 3600, builder.toString());
 		}
 		
-		return message;    	
+		return payload;    	
     }
     
     @Operation
@@ -58,7 +58,7 @@ public class MemcachedCloudConnector {
 			if(object != null) {
 				JsonSlurper parser = new JsonSlurper();
 				
-				map = (Map<String, Object>) parser.parseText((String) object);
+				parser.parseText((String) object);
 			}
 		}
 		

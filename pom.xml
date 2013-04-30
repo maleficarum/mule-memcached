@@ -6,20 +6,21 @@
     <groupId>org.mule.modules</groupId>
     <artifactId>mule-memcached</artifactId>
     <packaging>cloud-connector</packaging>
-    <name>Mule Memcached Cloud Connector</name>
+    <name>Memcached Cloud Connector</name>
     <version>1.0-SNAPSHOT</version>
     <description>Mule Cloud connector to Memcached</description>
     <url>http://www.muleforge.org/projects/mule-memcached</url>
 
     <properties>
-                <mule.version>3.3.4</mule.version>
+        <mule.version>3.3.1</mule.version>
         <!-- Tools properties -->
         <eclipsePluginVersion>2.8</eclipsePluginVersion>
         <vmtype>org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType</vmtype>
                 <!-- Jersey client is JDK6 only -->
         <jdk.name>JavaSE-1.6</jdk.name>
         <jdk.version>1.6</jdk.version>
-            </properties>
+         <devkit.studio.package.skip>false</devkit.studio.package.skip>
+	</properties>
 
     <build>
         <extensions>
@@ -181,6 +182,16 @@
             <groupId>org.mule.tools</groupId>
             <artifactId>mule-cloud-connector-annotations</artifactId>
             <version>2.0.15</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.tools.devkit</groupId>
+            <artifactId>mule-devkit-annotations-processor</artifactId>
+            <version>3.3.1</version>
+        </dependency>      
+		<dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>2.1.3</version>
         </dependency>
         <dependency>
             <groupId>spy.memcached</groupId>

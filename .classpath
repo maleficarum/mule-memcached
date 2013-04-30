@@ -4,8 +4,6 @@
 	<classpathentry excluding="**/*.java" kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry excluding="**/*.java" kind="src" output="target/test-classes" path="src/test/resources"/>
-	<classpathentry excluding="**/*.java" kind="src" path="target/generated-resources/mule"/>
-	<classpathentry kind="src" path="target/generated-sources/mule"/>
 	<classpathentry kind="con" path="MULE_RUNTIME"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="var" path="M2_REPO/com/sun/jersey/jersey-client/1.3/jersey-client-1.3.jar"/>
