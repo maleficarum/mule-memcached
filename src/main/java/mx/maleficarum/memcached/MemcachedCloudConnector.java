@@ -7,13 +7,14 @@ import org.mule.tools.cloudconnect.annotations.Connector;
 import org.mule.tools.cloudconnect.annotations.Operation;
 
 @Connector(namespacePrefix="memcached")
-public class MemcachedCloudConnector
-{
-    /*
-     * The following is a sample operation
-     */
+public class MemcachedCloudConnector {
+    
     @Operation
-    public void myOperation()
-    {
+    public void sendMessage(String key, Object message) {
+    }
+    
+    @Operation
+    public Object getMessage(String key) {
+    	return null;
     }
 }
