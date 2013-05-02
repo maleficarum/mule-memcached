@@ -11,7 +11,7 @@ To include this connector in your project, you have to include mule-memcached ja
 After that, you must modify mule-config.xml to add the connector schema as follows :
 
 #### Add the namespaces
-	xmlns:rabbitmq="http://www.mulesoft.org/schema/mule/memcached"
+	xmlns:memcached="http://www.mulesoft.org/schema/mule/memcached"
 
 #### Include de XSD location
 	http://www.mulesoft.org/schema/mule/memcached http://www.mulesoft.org/schema/mule/rabbitmq/1.0-SNAPSHOT/mule-memcached.xsd
