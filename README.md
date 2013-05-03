@@ -25,7 +25,7 @@ To connecto to Memcached service , you have to configure the follow params :
 
 Finally, to send messages to cache :
 
-	<memcached:send key="TRANSID" message="#[payload['c']]" />
+	<memcached:send key="TRANSID" payload="#[payload['c']]" />
 
 ... to send messages to queue :
 
