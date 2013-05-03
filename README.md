@@ -21,7 +21,7 @@ After that, you must modify mule-config.xml to add the connector schema as follo
 
 To connecto to Memcached service , you have to configure the follow params :
 
-	<memcached:config host="localhost" />
+	<memcached:config host="localhost" timeToForget="3600" port="11211" />
 
 Finally, to send messages to cache :
 

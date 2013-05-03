@@ -14,9 +14,12 @@ import java.util.Map;
 import net.spy.memcached.BinaryConnectionFactory;
 
 import org.mule.api.annotations.Connect;
+import org.mule.api.annotations.param.Optional;
 import org.mule.tools.cloudconnect.annotations.Connector;
 import org.mule.tools.cloudconnect.annotations.Operation;
 import org.mule.tools.cloudconnect.annotations.Property;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Connector(namespacePrefix="memcached")
 public class MemcachedCloudConnector {
@@ -27,11 +30,20 @@ public class MemcachedCloudConnector {
 	@Property
 	private String host;
 	
+	@Property
+	private Integer timeToForget = 3600;
+	
+	@Property
+	private Integer port ;
+	
+	private final Logger L = LoggerFactory.getLogger(MemcachedCloudConnector.class);
+	
 	@Connect
 	public void connect() {
 		try {
-			servers = new InetSocketAddress[]{ new InetSocketAddress( host , 11211) };
+			servers = new InetSocketAddress[]{ new InetSocketAddress( host , port) };
 			mc = new net.spy.memcached.MemcachedClient(new BinaryConnectionFactory(), new ArrayList<InetSocketAddress>(Arrays.asList(servers)));
+			L.info("Connecting to {}:{}", host, port);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -40,10 +52,19 @@ public class MemcachedCloudConnector {
     @Operation
     public Object send(String key, Object payload) {
 		
+		if(mc == null) {
+			this.connect();
+			L.warn("Not connected to memcached ... connecting...");
+		}
+		
 		if(mc != null) {
 			JsonBuilder builder = new  JsonBuilder(payload);
-			mc.set(key, 3600, builder.toString());
+			mc.set(key, timeToForget, builder.toString());
+			L.info("Saving {} as {}", builder.toString(), key);
+		} else {
+			L.error("Unable to connect to memcached ...");
 		}
+		
 		
 		return payload;    	
     }
@@ -71,6 +92,22 @@ public class MemcachedCloudConnector {
 
 	public void setHost(String host) {
 		this.host = host;
+	}
+
+	public Integer getTimeToForget() {
+		return timeToForget;
+	}
+
+	public void setTimeToForget(Integer timeToForget) {
+		this.timeToForget = timeToForget;
+	}
+
+	public Integer getPort() {
+		return port;
+	}
+
+	public void setPort(Integer port) {
+		this.port = port;
 	}
     
     
