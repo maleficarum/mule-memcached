@@ -14,7 +14,7 @@ After that, you must modify mule-config.xml to add the connector schema as follo
 	xmlns:memcached="http://www.mulesoft.org/schema/mule/memcached"
 
 #### Include de XSD location
-	http://www.mulesoft.org/schema/mule/memcached http://www.mulesoft.org/schema/mule/rabbitmq/1.0-SNAPSHOT/mule-memcached.xsd
+	http://www.mulesoft.org/schema/mule/memcached http://www.mulesoft.org/schema/mule/memcached/1.0-SNAPSHOT/mule-memcached.xsd
 
 #### Configuration
 =============
