@@ -77,9 +77,8 @@ public class MemcachedCloudConnector {
 			Object object = mc.get(key);
 
 			if(object != null) {
-				JsonSlurper parser = new JsonSlurper();
-				
-				parser.parseText((String) object);
+				JsonSlurper parser = new JsonSlurper();				
+				map = (Map<String, Object>) parser.parseText((String) object);
 			}
 		}
 		
